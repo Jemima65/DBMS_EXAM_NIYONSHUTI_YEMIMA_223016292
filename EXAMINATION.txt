@@ -1,0 +1,414 @@
+
+PART ONE SECTION A
+
+
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> CREATE DATABASE EXAMINATION;
+Query OK, 1 row affected (0.02 sec)
+
+mysql>
+mysql> USE EXAMINATION;
+Database changed
+mysql> CREATE TABLE CLIENT_MASTER(CLIENTNO INT NOT NULL PRIMARY KEY,NAME VARCHAR(20) NOT NULL,ADDRESS VARCHAR(30),CITY VARCHAR(30),STATE VARCHAR(30),BAL_DUE INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO CLIENT_MASTER VALUES(111,"UWERA JOSIANNE","BUTARE","HUYE","KIGALI",4000),(123,"NIYONSHUTI JEMIMA","HUYE","KINAZI","RUSIZI",4500),(211,"IZIBYOSE ALAIN","RUHANDE","GAKENKE","MUSANZE",5500),(223,"MURINZI ANNE","IMAMBA","BUGESERA","NYAGATARE",6000),(334,"INEZA HONOLINE","NYAMATA","RUBAVU","RWAHI",6500);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CLIENT_MASTER;
++----------+-------------------+---------+----------+-----------+---------+
+| CLIENTNO | NAME              | ADDRESS | CITY     | STATE     | BAL_DUE |
++----------+-------------------+---------+----------+-----------+---------+
+|      111 | UWERA JOSIANNE    | BUTARE  | HUYE     | KIGALI    |    4000 |
+|      123 | NIYONSHUTI JEMIMA | HUYE    | KINAZI   | RUSIZI    |    4500 |
+|      211 | IZIBYOSE ALAIN    | RUHANDE | GAKENKE  | MUSANZE   |    5500 |
+|      223 | MURINZI ANNE      | IMAMBA  | BUGESERA | NYAGATARE |    6000 |
+|      334 | INEZA HONOLINE    | NYAMATA | RUBAVU   | RWAHI     |    6500 |
++----------+-------------------+---------+----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT NAME FROM CLIENT_MASTER WHERE BAL_DUE>5000;
++----------------+
+| NAME           |
++----------------+
+| IZIBYOSE ALAIN |
+| MURINZI ANNE   |
+| INEZA HONOLINE |
++----------------+
+3 rows in set (0.00 sec)
+
+
+mysql> UPDATE CLIENT_MASTER SET BAL_DUE=5100 WHERE CLIENTNO=123;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> SELECT * FROM CLIENT_MASTER;
++----------+-------------------+---------+----------+-----------+---------+
+| CLIENTNO | NAME              | ADDRESS | CITY     | STATE     | BAL_DUE |
++----------+-------------------+---------+----------+-----------+---------+
+|      111 | UWERA JOSIANNE    | BUTARE  | HUYE     | KIGALI    |    4000 |
+|      123 | NIYONSHUTI JEMIMA | HUYE    | KINAZI   | RUSIZI    |    5100 |
+|      211 | IZIBYOSE ALAIN    | RUHANDE | GAKENKE  | MUSANZE   |    5500 |
+|      223 | MURINZI ANNE      | IMAMBA  | BUGESERA | NYAGATARE |    6000 |
+|      334 | INEZA HONOLINE    | NYAMATA | RUBAVU   | RWAHI     |    6500 |
++----------+-------------------+---------+----------+-----------+---------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> RENAME TABLE CLIENT_MASTER TO CLIENT12;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> SELECT * FROM CLIENT12;
++----------+-------------------+---------+----------+-----------+---------+
+| CLIENTNO | NAME              | ADDRESS | CITY     | STATE     | BAL_DUE |
++----------+-------------------+---------+----------+-----------+---------+
+|      111 | UWERA JOSIANNE    | BUTARE  | HUYE     | KIGALI    |    4000 |
+|      123 | NIYONSHUTI JEMIMA | HUYE    | KINAZI   | RUSIZI    |    5100 |
+|      211 | IZIBYOSE ALAIN    | RUHANDE | GAKENKE  | MUSANZE   |    5500 |
+|      223 | MURINZI ANNE      | IMAMBA  | BUGESERA | NYAGATARE |    6000 |
+|      334 | INEZA HONOLINE    | NYAMATA | RUBAVU   | RWAHI     |    6500 |
++----------+-------------------+---------+----------+-----------+---------+
+5 rows in set (0.01 sec)
+
+
+
+mysql> ALTER TABLE CLIENT12 CHANGE BAL_DUE BALANCE INT;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM CLIENT12;
++----------+-------------------+---------+----------+-----------+---------+
+| CLIENTNO | NAME              | ADDRESS | CITY     | STATE     | BALANCE |
++----------+-------------------+---------+----------+-----------+---------+
+|      111 | UWERA JOSIANNE    | BUTARE  | HUYE     | KIGALI    |    4000 |
+|      123 | NIYONSHUTI JEMIMA | HUYE    | KINAZI   | RUSIZI    |    5100 |
+|      211 | IZIBYOSE ALAIN    | RUHANDE | GAKENKE  | MUSANZE   |    5500 |
+|      223 | MURINZI ANNE      | IMAMBA  | BUGESERA | NYAGATARE |    6000 |
+|      334 | INEZA HONOLINE    | NYAMATA | RUBAVU   | RWAHI     |    6500 |
++----------+-------------------+---------+----------+-----------+---------+
+5 rows in set (0.01 sec)
+
+ PART TWO SECTION B
+
+
+mysql> CREATE TABLE DEPARTMENTS(DEP_ID INT NOT NULL PRIMARY KEY,DEP_NAME VARCHAR(20) NOT NULL,DEP_ADDRESS VARCHAR(20));
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> INSERT INTO DEPARTMENTS VALUES(11,"BIT","BATIMENT"),(22,"ACC","KOICA"),(33,"FINANCE","LECTORA"),(44,"INSURANCE","MAMBA"),(55,"HRM","INNOHUB");
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> SELECT * FROM DEPARTMENTS;
++--------+-----------+-------------+
+| DEP_ID | DEP_NAME  | DEP_ADDRESS |
++--------+-----------+-------------+
+|     11 | BIT       | BATIMENT    |
+|     22 | ACC       | KOICA       |
+|     33 | FINANCE   | LECTORA     |
+|     44 | INSURANCE | MAMBA       |
+|     55 | HRM       | INNOHUB     |
++--------+-----------+-------------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> INSERT INTO EMPLOYEES VALUES(1,"ALICE","BATIMENT",11),(2,"JANNE","KIZA",22),(3,"RWEMA","GENDA",33),(4,"KAMI","MAMBA",44),(5,"INEZA","RUHANDE",55);
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEES;
++--------+----------+-------------+--------+
+| EMP_ID | EMP_NAME | EMP_ADDRESS | DEP_ID |
++--------+----------+-------------+--------+
+|      1 | ALICE    | BATIMENT    |     11 |
+|      2 | JANNE    | KIZA        |     22 |
+|      3 | RWEMA    | GENDA       |     33 |
+|      4 | KAMI     | MAMBA       |     44 |
+|      5 | INEZA    | RUHANDE     |     55 |
++--------+----------+-------------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT DEPARTMENTS.DEP_NAME,EMPLOYEES.EMP_NAME FROM DEPARTMENTS LEFT JOIN EMPLOYEES ON DEPARTMENTS.DEP_ID=EMPLOYEES.DEP_ID;
++-----------+----------+
+| DEP_NAME  | EMP_NAME |
++-----------+----------+
+| BIT       | ALICE    |
+| ACC       | JANNE    |
+| FINANCE   | RWEMA    |
+| INSURANCE | KAMI     |
+| HRM       | INEZA    |
++-----------+----------+
+5 rows in set (0.00 sec)
+
+
+
+
+mysql> SELECT DEPARTMENTS.DEP_NAME,EMPLOYEES.EMP_NAME FROM DEPARTMENTS RIGHT JOIN EMPLOYEES ON DEPARTMENTS.DEP_ID=EMPLOYEES.DEP_ID;
++-----------+----------+
+| DEP_NAME  | EMP_NAME |
++-----------+----------+
+| BIT       | ALICE    |
+| ACC       | JANNE    |
+| FINANCE   | RWEMA    |
+| INSURANCE | KAMI     |
+| HRM       | INEZA    |
++-----------+----------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM EMPLOYEES;
++--------+----------+-------------+--------+------------+
+| EMP_ID | EMP_NAME | EMP_ADDRESS | DEP_ID | EMP_SALARY |
++--------+----------+-------------+--------+------------+
+|      1 | ALICE    | BATIMENT    |     11 |       3000 |
+|      2 | JANNE    | KIZA        |     22 |       3500 |
+|      3 | RWEMA    | GENDA       |     33 |       4000 |
+|      4 | KAMI     | MAMBA       |     44 |       4200 |
+|      5 | INEZA    | RUHANDE     |     55 |       6200 |
++--------+----------+-------------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT AVG(EMP_SALARY) FROM EMPLOYEES;
++-----------------+
+| AVG(EMP_SALARY) |
++-----------------+
+|       4180.0000 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql>
+mysql> SELECT EMP_SALARY FROM EMPLOYEES WHERE EMP_SALARY>4180;
++------------+
+| EMP_SALARY |
++------------+
+|       4200 |
+|       6200 |
++------------+
+2 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE  STUDENT( STUDENT_ID VARCHAR(5),FULLNAME VARCHAR(25),GENDER VARCHAR(6),AGE INT(2),DEPARTMENT VARCHAR(30));
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+
+mysql> INSERT INTO STUDENT VALUES(1,"INEZA HONORINE","FEMALE","22","BIT"),(2,"IRANZI AIME","MALE","20","ACC"),(3,"IRADUKUNDA ALINE","FEMALE","17","FINANCE"),(4,"IZIBYOSE FRANK","MALE","21","HRM"),(5,"NIYO JEMIMA","FEMALE","18","CASS"),(6,"KAGABO ALAIN","MALE","23","LAW");
+Query OK, 6 rows affected (0.01 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM STUDENT;
++------------+------------------+--------+------+------------+
+| STUDENT_ID | FULLNAME         | GENDER | AGE  | DEPARTMENT |
++------------+------------------+--------+------+------------+
+| 1          | INEZA HONORINE   | FEMALE |   22 | BIT        |
+| 2          | IRANZI AIME      | MALE   |   20 | ACC        |
+| 3          | IRADUKUNDA ALINE | FEMALE |   17 | FINANCE    |
+| 4          | IZIBYOSE FRANK   | MALE   |   21 | HRM        |
+| 5          | NIYO JEMIMA      | FEMALE |   18 | CASS       |
+| 6          | KAGABO ALAIN     | MALE   |   23 | LAW        |
++------------+------------------+--------+------+------------+
+6 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM STUDENT WHERE GENDER="FEMALE";
++------------+------------------+--------+------+------------+
+| STUDENT_ID | FULLNAME         | GENDER | AGE  | DEPARTMENT |
++------------+------------------+--------+------+------------+
+| 1          | INEZA HONORINE   | FEMALE |   22 | BIT        |
+| 3          | IRADUKUNDA ALINE | FEMALE |   17 | FINANCE    |
+| 5          | NIYO JEMIMA      | FEMALE |   18 | CASS       |
++------------+------------------+--------+------+------------+
+3 rows in set (0.00 sec)
+
+
+
+mysql> SELECT * FROM STUDENT WHERE GENDER="MALE";
++------------+----------------+--------+------+------------+
+| STUDENT_ID | FULLNAME       | GENDER | AGE  | DEPARTMENT |
++------------+----------------+--------+------+------------+
+| 2          | IRANZI AIME    | MALE   |   20 | ACC        |
+| 4          | IZIBYOSE FRANK | MALE   |   21 | HRM        |
+| 6          | KAGABO ALAIN   | MALE   |   23 | LAW        |
++------------+----------------+--------+------+------------+
+3 rows in set (0.00 sec)
+
+
+mysql> DELETE FROM STUDENT WHERE AGE<20;
+Query OK, 2 rows affected (0.00 sec)
+
+mysql> SELECT * FROM STUDENT;
++------------+----------------+--------+------+------------+
+| STUDENT_ID | FULLNAME       | GENDER | AGE  | DEPARTMENT |
++------------+----------------+--------+------+------------+
+| 1          | INEZA HONORINE | FEMALE |   22 | BIT        |
+| 2          | IRANZI AIME    | MALE   |   20 | ACC        |
+| 4          | IZIBYOSE FRANK | MALE   |   21 | HRM        |
+| 6          | KAGABO ALAIN   | MALE   |   23 | LAW        |
++------------+----------------+--------+------+------------+
+4 rows in set (0.00 sec)
+
+
+
+
+
+PART 3 SECTION C
+
+
+mysql> CREATE TABLE EMPLOYEE(EMPLOYEE_ID INT NOT NULL PRIMARY KEY,FIRST_NAME VARCHAR(20) NOT NULL,LAST_NAME VARCHAR(20) NOT NULL,EMAIL VARCHAR(20),PHON_NUMBER INT,HIRE_DATE DATE,JOB_ID INT,SALARY INT,COMMISSION_PCT INT,MANAGER_ID INT,DEPARTMENT_ID INT);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(11,"AMINA","NIYO","AMINA@GMAIL.COM",0788889629,20231201,110,4800,1001,90,60);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO EMPLOYEE VALUES(12,"EMMY","KAGABO","EMMY@GMAIL.COM",0788089629,20240201,120,4900,1002,100,70),(13,"JEMIMA","IZABAYO","JEMIMA@GMAIL.COM",0798089629,20220201,130,5900,1003,110,80),(14,"AUSTIN","NGABO","AUSTIN@GMAIL.COM",0799089629,20250204,130,4000,1004,200,80),(15,"RUGABA","AUSTIN","RUGABA@GMAIL.COM",0788089680,20200613,150,6000,1005,300,90);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM EMPLOYEE;
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL            | PHON_NUMBER | HIRE_DATE  | JOB_ID | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+|          11 | AMINA      | NIYO      | AMINA@GMAIL.COM  |   788889629 | 2023-12-01 |    110 |   4800 |           1001 |         90 |            60 |
+|          12 | EMMY       | KAGABO    | EMMY@GMAIL.COM   |   788089629 | 2024-02-01 |    120 |   4900 |           1002 |        100 |            70 |
+|          13 | JEMIMA     | IZABAYO   | JEMIMA@GMAIL.COM |   798089629 | 2022-02-01 |    130 |   5900 |           1003 |        110 |            80 |
+|          14 | AUSTIN     | NGABO     | AUSTIN@GMAIL.COM |   799089629 | 2025-02-04 |    130 |   4000 |           1004 |        200 |            80 |
+|          15 | RUGABA     | AUSTIN    | RUGABA@GMAIL.COM |   788089680 | 2020-06-13 |    150 |   6000 |           1005 |        300 |            90 |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+5 rows in set (0.00 sec)
+
+
+
+
+mysql> SELECT EMPLOYEE_ID,FIRST_NAME,LAST_NAME,SALARY FROM EMPLOYEE;
++-------------+------------+-----------+--------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | SALARY |
++-------------+------------+-----------+--------+
+|          11 | AMINA      | NIYO      |   4800 |
+|          12 | EMMY       | KAGABO    |   4900 |
+|          13 | JEMIMA     | IZABAYO   |   5900 |
+|          14 | AUSTIN     | NGABO     |   4000 |
+|          15 | RUGABA     | AUSTIN    |   6000 |
++-------------+------------+-----------+--------+
+5 rows in set (0.00 sec)
+
+
+mysql> SELECT * FROM EMPLOYEE WHERE MANAGER_ID=100;
++-------------+------------+-----------+----------------+-------------+------------+--------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL          | PHON_NUMBER | HIRE_DATE  | JOB_ID | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+----------------+-------------+------------+--------+--------+----------------+------------+---------------+
+|          12 | EMMY       | KAGABO    | EMMY@GMAIL.COM |   788089629 | 2024-02-01 |    120 |   4900 |           1002 |        100 |            70 |
++-------------+------------+-----------+----------------+-------------+------------+--------+--------+----------------+------------+---------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT * FROM EMPLOYEE WHERE SALARY>=4800;
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL            | PHON_NUMBER | HIRE_DATE  | JOB_ID | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+|          11 | AMINA      | NIYO      | AMINA@GMAIL.COM  |   788889629 | 2023-12-01 |    110 |   4800 |           1001 |         90 |            60 |
+|          12 | EMMY       | KAGABO    | EMMY@GMAIL.COM   |   788089629 | 2024-02-01 |    120 |   4900 |           1002 |        100 |            70 |
+|          13 | JEMIMA     | IZABAYO   | JEMIMA@GMAIL.COM |   798089629 | 2022-02-01 |    130 |   5900 |           1003 |        110 |            80 |
+|          15 | RUGABA     | AUSTIN    | RUGABA@GMAIL.COM |   788089680 | 2020-06-13 |    150 |   6000 |           1005 |        300 |            90 |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT * FROM EMPLOYEE WHERE LAST_NAME="AUSTIN";
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL            | PHON_NUMBER | HIRE_DATE  | JOB_ID | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+|          15 | RUGABA     | AUSTIN    | RUGABA@GMAIL.COM |   788089680 | 2020-06-13 |    150 |   6000 |           1005 |        300 |            90 |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT * FROM EMPLOYEE WHERE DEPARTMENT_ID IN(60,70,80);
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+| EMPLOYEE_ID | FIRST_NAME | LAST_NAME | EMAIL            | PHON_NUMBER | HIRE_DATE  | JOB_ID | SALARY | COMMISSION_PCT | MANAGER_ID | DEPARTMENT_ID |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+|          11 | AMINA      | NIYO      | AMINA@GMAIL.COM  |   788889629 | 2023-12-01 |    110 |   4800 |           1001 |         90 |            60 |
+|          12 | EMMY       | KAGABO    | EMMY@GMAIL.COM   |   788089629 | 2024-02-01 |    120 |   4900 |           1002 |        100 |            70 |
+|          13 | JEMIMA     | IZABAYO   | JEMIMA@GMAIL.COM |   798089629 | 2022-02-01 |    130 |   5900 |           1003 |        110 |            80 |
+|          14 | AUSTIN     | NGABO     | AUSTIN@GMAIL.COM |   799089629 | 2025-02-04 |    130 |   4000 |           1004 |        200 |            80 |
++-------------+------------+-----------+------------------+-------------+------------+--------+--------+----------------+------------+---------------+
+4 rows in set (0.00 sec)
+
+
+mysql> CREATE TABLE SALES(SALESNO INT,SALESNAME VARCHAR(30),BRANCH VARCHAR(23),SALESAMOUNT INT,DOB DATE);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> INSERT INTO SALES VALUES (1,"JEMIMA","HUYE",300,2023DEC01);
+ERROR 1054 (42S22): Unknown column '2023DEC01' in 'field list'
+mysql> INSERT INTO SALES VALUES (1,"JEMIMA","HUYE",300,20231201);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO SALES VALUES (2,"ANNET","RUBAVU",200,20210601),(3,"ERIC","MUSANZE",400,20240712),(4,"AMINA","BUTARE",700,20221209),(5,"ALINE","KIGALI",900,20190101);
+Query OK, 4 rows affected (0.00 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> SELECT*FROM SALES;
++---------+-----------+---------+-------------+------------+
+| SALESNO | SALESNAME | BRANCH  | SALESAMOUNT | DOB        |
++---------+-----------+---------+-------------+------------+
+|       1 | JEMIMA    | HUYE    |         300 | 2023-12-01 |
+|       2 | ANNET     | RUBAVU  |         200 | 2021-06-01 |
+|       3 | ERIC      | MUSANZE |         400 | 2024-07-12 |
+|       4 | AMINA     | BUTARE  |         700 | 2022-12-09 |
+|       5 | ALINE     | KIGALI  |         900 | 2019-01-01 |
++---------+-----------+---------+-------------+------------+
+5 rows in set (0.00 sec)
+
+
+
+mysql> SELECT SUM(SALESAMOUNT) FROM SALES;
++------------------+
+| SUM(SALESAMOUNT) |
++------------------+
+|             2500 |
++------------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT AVG(SALESAMOUNT) FROM SALES;
++------------------+
+| AVG(SALESAMOUNT) |
++------------------+
+|         500.0000 |
++------------------+
+1 row in set (0.00 sec)
+
+
+mysql> SELECT * FROM SALES WHERE DOB=20210601;
++---------+-----------+--------+-------------+------------+
+| SALESNO | SALESNAME | BRANCH | SALESAMOUNT | DOB        |
++---------+-----------+--------+-------------+------------+
+|       2 | ANNET     | RUBAVU |         200 | 2021-06-01 |
++---------+-----------+--------+-------------+------------+
+1 row in set (0.00 sec)
+
+
++-----------+------------+
+| SALESNAME | DOB        |
++-----------+------------+
+| JEMIMA    | 2023-12-01 |
+| ANNET     | 2021-06-01 |
+| ERIC      | 2024-07-12 |
+| AMINA     | 2022-12-09 |
+| ALINE     | 2019-01-01 |
++-----------+------------+
+5 rows in set (0.00 sec)
+
